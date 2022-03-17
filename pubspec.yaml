@@ -1,6 +1,6 @@
 name: group_select
 description: 'Package FLutter: Multiple selection component with groupings'
-version: 1.0.0
+version: 1.0.1
 homepage: https://dart.dev/tools/pub/pubspec
 
 environment:
