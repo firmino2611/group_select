@@ -1,0 +1,104 @@
+import 'package:group_select/components/group_select.dart';
+import 'package:group_select/controllers/group_header/group_header_controller.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:group_select/controllers/group_select/group_select_controller.dart';
+import 'package:group_select/utils/ci_colors.dart';
+
+class GroupHeader extends StatefulWidget {
+  const GroupHeader({
+    Key? key,
+    required this.title,
+    required this.icon,
+    this.isSub = false,
+    this.itemCount = 0,
+    this.itemCountSelected = 0,
+    this.selectController,
+    this.controller,
+    this.activeColor,
+  }) : super(key: key);
+
+  final GroupSelectControllerStore? selectController;
+  final GroupHeaderController? controller;
+
+  final Widget icon;
+
+  final bool isSub;
+
+  final int itemCount;
+  final int itemCountSelected;
+
+  final String title;
+
+  final Color? activeColor;
+
+  @override
+  State<GroupHeader> createState() => _GroupHeaderState();
+}
+
+class _GroupHeaderState extends State<GroupHeader> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 55,
+      decoration: BoxDecoration(
+        color: widget.isSub ? CIColors.grey100 : CIColors.white,
+        border: const Border(
+          bottom: BorderSide(
+            color: CIColors.grey200,
+          ),
+        ),
+      ),
+      padding: widget.isSub ? const EdgeInsets.only(left: 40) : null,
+      child: Row(
+        children: [
+          widget.icon,
+          Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: Text(
+              widget.title,
+              style: const TextStyle(fontSize: 17),
+            ),
+          ),
+          GroupBadge(
+            text: _getText,
+            active: widget.itemCountSelected > 0,
+            activeColor: widget.activeColor,
+          ),
+          const Spacer(),
+          Visibility(
+            visible: widget.isSub && widget.controller != null,
+            child: Observer(
+              builder: (_) {
+                return Padding(
+                  padding: const EdgeInsets.only(right: 20.0),
+                  child: Checkbox(
+                    onChanged: widget.controller?.onChange,
+                    value: widget.controller?.checkAll ?? false,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    fillColor: MaterialStateProperty.resolveWith((states) {
+                      if (states.contains(MaterialState.selected)) {
+                        return widget.activeColor ?? CIColors.blue;
+                      }
+                      return CIColors.grey600;
+                    }),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  String get _getText =>
+      "${widget.itemCountSelected.toString()} ${widget.selectController?.translateBadge()} ${widget.itemCount.toString()}";
+}
