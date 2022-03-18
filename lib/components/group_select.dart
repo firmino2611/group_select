@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:group_select/components/group_header.dart';
 import 'package:group_select/components/group_item.dart';
 import 'package:group_select/components/item_select.dart';
