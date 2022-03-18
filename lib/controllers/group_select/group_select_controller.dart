@@ -37,6 +37,11 @@ abstract class _GroupSelectControllerBaseStore with Store {
   @observable
   ObservableList<T>? values = ObservableList<T>();
 
+  @computed
+  List<T> get getValues => values?.map((val) => val).toList() ?? [];
+
+  /// Setup control verify has group
+  /// [val] if 'true' has groups
   @action
   setHasGroups(bool val) {
     hasGroups = val;
@@ -102,16 +107,21 @@ abstract class _GroupSelectControllerBaseStore with Store {
     log('values: ' + values.toString());
   }
 
+  /// Remove value of list
+  /// [val] values to be removed of list
   @action
   removeValue(val) {
     values?.removeWhere((value) => value == val);
   }
 
+  /// Control display of items/groups
   @action
   toggle() {
     rotation = rotation == 0 ? .5 : 0;
   }
 
+  /// Verify if has any group with id repeat
+  /// [groups] list of groups
   hasGroupIdsRepeated(List<Group>? groups) {
     if (groups != null) {
       for (Group group in groups) {
@@ -125,6 +135,7 @@ abstract class _GroupSelectControllerBaseStore with Store {
     return false;
   }
 
+  /// Translate text of badge item
   translateBadge() {
     switch (lang) {
       case Lang.ptBR:

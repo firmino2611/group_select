@@ -9,6 +9,14 @@ part of 'group_select_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$GroupSelectControllerStore on _GroupSelectControllerBaseStore, Store {
+  Computed<List<dynamic>>? _$getValuesComputed;
+
+  @override
+  List<dynamic> get getValues =>
+      (_$getValuesComputed ??= Computed<List<dynamic>>(() => super.getValues,
+              name: '_GroupSelectControllerBaseStore.getValues'))
+          .value;
+
   final _$groupItemsSelectAtom =
       Atom(name: '_GroupSelectControllerBaseStore.groupItemsSelect');
 
@@ -152,7 +160,8 @@ groupItemsSelect: ${groupItemsSelect},
 hasGroups: ${hasGroups},
 itemsSelect: ${itemsSelect},
 rotation: ${rotation},
-values: ${values}
+values: ${values},
+getValues: ${getValues}
     ''';
   }
 }

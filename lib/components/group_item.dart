@@ -54,7 +54,7 @@ class _GroupItemState extends State<GroupItem> {
       bool allItemSelected =
           widget.items?.length == widget.controller!.countItemsSelected(widget);
 
-      groupHeaderController.onChange(allItemSelected, true);
+      groupHeaderController.onClickChackAll(allItemSelected, true);
     });
   }
 

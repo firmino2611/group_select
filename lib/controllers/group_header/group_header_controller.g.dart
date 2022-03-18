@@ -28,11 +28,11 @@ mixin _$GroupHeaderController on _GroupHeaderControllerStoreBase, Store {
       ActionController(name: '_GroupHeaderControllerStoreBase');
 
   @override
-  dynamic onChange(bool? value, [bool? onlyVisual]) {
+  dynamic onClickChackAll(bool? value, [bool? onlyVisual]) {
     final _$actionInfo = _$_GroupHeaderControllerStoreBaseActionController
-        .startAction(name: '_GroupHeaderControllerStoreBase.onChange');
+        .startAction(name: '_GroupHeaderControllerStoreBase.onClickChackAll');
     try {
-      return super.onChange(value, onlyVisual);
+      return super.onClickChackAll(value, onlyVisual);
     } finally {
       _$_GroupHeaderControllerStoreBaseActionController.endAction(_$actionInfo);
     }

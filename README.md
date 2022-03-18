@@ -113,6 +113,14 @@ GroupSelect<String>(
 
 ![](https://appinventorbrasil.com.br/group-select/colors-screenshot.png)
 
+## Controller
+
+To recover values selected use property **values** of controller:
+
+```dart
+List<T> get getValues(){}
+```
+
 ## Additional information
 
 CONTRIBUTORS:

@@ -20,6 +20,7 @@ abstract class _GroupItemControllerStoreBase with Store {
     rotation = rotation == 0 ? .5 : 0;
   }
 
+  /// Count number of items selected
   countItemsSelected(GroupItem widget) {
     int count = 0;
     for (ItemSelect item in widget.items!) {

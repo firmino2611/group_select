@@ -78,7 +78,7 @@ class _GroupHeaderState extends State<GroupHeader> {
                 return Padding(
                   padding: const EdgeInsets.only(right: 20.0),
                   child: Checkbox(
-                    onChanged: widget.controller?.onChange,
+                    onChanged: widget.controller?.onClickChackAll,
                     value: widget.controller?.checkAll ?? false,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(6),
