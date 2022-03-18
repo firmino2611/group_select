@@ -1,6 +1,10 @@
+## 1.0.2
+
+Format code.
+
 ## 1.0.1
 
-No changed, only update version
+No changed, only update version.
 
 ## 1.0.0
 
