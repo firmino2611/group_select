@@ -1,6 +1,6 @@
 name: group_select
 description: 'Package FLutter: Multiple selection component with groupings'
-version: 1.1.0
+version: 1.1.1
 homepage: https://github.com/firmino2611/group_select
 
 environment:

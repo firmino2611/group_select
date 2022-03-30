@@ -1,3 +1,7 @@
+## 1.1.1
+
+- Bug fixed: Did not keep the values of select item after initialization
+
 ## 1.1.0
 
 - Add methods (**getValues**) to get values selected
