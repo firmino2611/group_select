@@ -16,6 +16,8 @@ class GroupSelectControllerStore<T> = _GroupSelectControllerBaseStore
 abstract class _GroupSelectControllerBaseStore with Store {
   int totalItems = 0;
 
+  bool _hasInitialized = false;
+
   _GroupSelectControllerBaseStore({
     this.lang = Lang.enUS,
   });
@@ -51,6 +53,8 @@ abstract class _GroupSelectControllerBaseStore with Store {
   /// [widget] GroupSelect
   @action
   setup(GroupSelect widget) {
+    if (_hasInitialized) return;
+
     if (widget.items != null) {
       final list = widget.items!.map(
         (e) {
@@ -65,7 +69,7 @@ abstract class _GroupSelectControllerBaseStore with Store {
       ).toList();
 
       itemsSelect = ObservableList.of(list);
-
+      _hasInitialized = true;
       return;
     }
 
@@ -93,6 +97,7 @@ abstract class _GroupSelectControllerBaseStore with Store {
       ).toList();
 
       groupItemsSelect = ObservableList.of(list);
+      _hasInitialized = true;
     }
   }
 
