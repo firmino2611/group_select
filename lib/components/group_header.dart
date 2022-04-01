@@ -58,19 +58,33 @@ class _GroupHeaderState extends State<GroupHeader> {
       child: Row(
         children: [
           widget.icon,
-          Padding(
-            padding: const EdgeInsets.only(right: 10),
-            child: Text(
-              widget.title,
-              style: const TextStyle(fontSize: 17),
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Flexible(
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: Text(
+                      widget.title,
+                      style: const TextStyle(
+                        fontSize: 17,
+                        color: CIColors.grey700,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ),
+                GroupBadge(
+                  text: _getText,
+                  activeColor: widget.activeColor,
+                  active: widget.itemCountSelected > 0,
+                ),
+              ],
             ),
           ),
-          GroupBadge(
-            text: _getText,
-            active: widget.itemCountSelected > 0,
-            activeColor: widget.activeColor,
-          ),
-          const Spacer(),
           Visibility(
             visible: widget.isSub && widget.controller != null,
             child: Observer(

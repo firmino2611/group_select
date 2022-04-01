@@ -1,10 +1,15 @@
+## 1.2.0
+
+- Added new action to clear a values (**resetValues**)
+- Bug fixed: Layout header group
+
 ## 1.1.1
 
 - Bug fixed: Did not keep the values of select item after initialization
 
 ## 1.1.0
 
-- Add methods (**getValues**) to get values selected
+- Added methods (**getValues**) to get values selected
 - Change name method in controller internal (does not affect use)
 
 ### Comming soon:

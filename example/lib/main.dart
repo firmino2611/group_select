@@ -47,6 +47,19 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: ElevatedButton(
+        child: const Padding(
+          padding: EdgeInsets.all(20.0),
+          child: Text('Reset'),
+        ),
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(Colors.blue),
+        ),
+        onPressed: () {
+          controller.resetValues();
+          controller2.resetValues();
+        },
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [

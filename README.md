@@ -121,6 +121,12 @@ To recover values selected use property **values** of controller:
 List<T> get getValues(){}
 ```
 
+To clear a values use:
+
+```dart
+List<T> get resetValues(){}
+```
+
 ## Additional information
 
 CONTRIBUTORS:

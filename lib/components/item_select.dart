@@ -25,6 +25,15 @@ class ItemSelect extends StatefulWidget {
 }
 
 class _ItemSelectState extends State<ItemSelect> {
+  @override
+  void initState() {
+    super.initState();
+
+    widget.selectController?.whenValuesCleared.listen((event) {
+      widget.controller?.setChecked(false);
+    });
+  }
+
   void _check() {
     widget.controller?.setChecked(!(widget.controller?.isCheck ?? false));
 
@@ -34,8 +43,6 @@ class _ItemSelectState extends State<ItemSelect> {
       widget.selectController?.removeValue(widget.item.value);
     }
   }
-
-  test() {}
 
   @override
   Widget build(BuildContext context) {
@@ -50,9 +57,17 @@ class _ItemSelectState extends State<ItemSelect> {
           ),
         ),
         child: ListTile(
-          title: Text(
-            widget.item.title,
-            style: const TextStyle(fontSize: 17, color: CIColors.grey700),
+          title: Expanded(
+            child: Text(
+              widget.item.title,
+              style: const TextStyle(
+                fontSize: 17,
+                color: CIColors.grey700,
+                overflow: TextOverflow.fade,
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.fade,
+            ),
           ),
           tileColor: CIColors.grey100,
           onTap: _check,
@@ -66,7 +81,8 @@ class _ItemSelectState extends State<ItemSelect> {
             onChanged: (bool? value) {
               _check();
             },
-            value: widget.controller?.isCheck ?? false,
+            value: (widget.controller?.isCheck ?? false) &&
+                widget.selectController!.getValues.isNotEmpty,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(6),
             ),

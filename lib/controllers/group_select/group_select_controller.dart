@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:group_select/components/group_select.dart';
@@ -18,9 +19,14 @@ abstract class _GroupSelectControllerBaseStore with Store {
 
   bool _hasInitialized = false;
 
+  final _whenValuesClearedStream = StreamController<bool>.broadcast();
+  late Stream<bool> whenValuesCleared;
+
   _GroupSelectControllerBaseStore({
     this.lang = Lang.enUS,
-  });
+  }) {
+    whenValuesCleared = _whenValuesClearedStream.stream;
+  }
 
   final Lang lang;
 
@@ -123,6 +129,18 @@ abstract class _GroupSelectControllerBaseStore with Store {
   @action
   toggle() {
     rotation = rotation == 0 ? .5 : 0;
+  }
+
+  /// Reset all selected values
+  @action
+  resetValues() {
+    values?.clear();
+    _whenValuesClearedStream.sink.add(true);
+  }
+
+  /// Closed controller stream
+  dispose() {
+    _whenValuesClearedStream.close();
   }
 
   /// Verify if has any group with id repeat
