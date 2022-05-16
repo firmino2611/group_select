@@ -1,4 +1,9 @@
+## 1.3.1
+- Update README.md
+- Removed badge in single option
+
 ## 1.3.0
+
 - Added new option of initialized controller, (**multiple**) define the type of selection.
 - Update enum to super enum, of new API Dart.
 - Update dart sdk version 2.17

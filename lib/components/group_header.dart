@@ -77,10 +77,13 @@ class _GroupHeaderState extends State<GroupHeader> {
                     ),
                   ),
                 ),
-                GroupBadge(
-                  text: _getText,
-                  activeColor: widget.activeColor,
-                  active: widget.itemCountSelected > 0,
+                Visibility(
+                  visible: (widget.selectController?.multiple ?? false),
+                  child: GroupBadge(
+                    text: _getText,
+                    activeColor: widget.activeColor,
+                    active: widget.itemCountSelected > 0,
+                  ),
                 ),
               ],
             ),

@@ -1,4 +1,6 @@
 Multiple selection component with groupings
+##### DEMO http://group-select.appinventorbrasil.com.br/#/
+
 ## Getting started
 
 Import package
@@ -13,7 +15,8 @@ To use the component it is necessary to create a controller, and you can also sp
 
 ```dart
 final SelectController<int> controller = SelectController<int>(
-    lang:
+    lang: LangBadge.enUS,
+    multiple: false,
 );
 
 final SelectController<String> groupController = SelectController<String>();
@@ -36,10 +39,6 @@ The initalization component need to receive a controller:
     ],
 ),
 ```
-
-### Screenshot
-
-![](https://appinventorbrasil.com.br/group-select/items-leading-screenshoot.png)
 
 The groups need of an unique id.
 
@@ -76,10 +75,6 @@ GroupSelect<String>(
 )
 ```
 
-### Screenshot
-
-![](https://appinventorbrasil.com.br/group-select/group-items-screenshot.png)
-
 ## Properties
 
 Items can have a **leading**, that can be any widget:
@@ -97,10 +92,6 @@ Item(
 ),
 ```
 
-### Screenshot
-
-![](https://appinventorbrasil.com.br/group-select/items-screenshoot.png)
-
 It's possible change color active (**activeColor**) in badge and checkbox:
 
 ```dart
@@ -109,10 +100,6 @@ GroupSelect<String>(
     activeColor: Colors.green,
 );
 ```
-
-### Screenshots
-
-![](https://appinventorbrasil.com.br/group-select/colors-screenshot.png)
 
 ## Controller
 

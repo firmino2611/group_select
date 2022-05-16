@@ -70,17 +70,15 @@ class _ItemSelectState extends State<ItemSelect> {
           ),
         ),
         child: ListTile(
-          title: Expanded(
-            child: Text(
-              widget.item.title,
-              style: const TextStyle(
-                fontSize: 17,
-                color: ColorsUtil.grey700,
-                overflow: TextOverflow.fade,
-              ),
-              maxLines: 1,
+          title: Text(
+            widget.item.title,
+            style: const TextStyle(
+              fontSize: 17,
+              color: ColorsUtil.grey700,
               overflow: TextOverflow.fade,
             ),
+            maxLines: 1,
+            overflow: TextOverflow.fade,
           ),
           tileColor: ColorsUtil.grey100,
           onTap:
@@ -99,9 +97,11 @@ class _ItemSelectState extends State<ItemSelect> {
             },
             value: (widget.controller?.isCheck ?? false) &&
                 widget.selectController!.getValues.isNotEmpty,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(6),
-            ),
+            shape: widget.selectController!.multiple
+                ? RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(6),
+                  )
+                : const CircleBorder(),
             fillColor: MaterialStateProperty.resolveWith((states) {
               if (states.contains(MaterialState.selected)) {
                 return widget.activeColor ?? ColorsUtil.blue;

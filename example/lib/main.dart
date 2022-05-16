@@ -44,6 +44,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final SelectController<int> itemController = SelectController<int>();
   final SelectController<String> groupController = SelectController<String>();
+  final SelectController<int> itemControllerSingle = SelectController<int>(
+    multiple: false,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +66,7 @@ class _HomePageState extends State<HomePage> {
           onPressed: () {
             itemController.resetValues();
             groupController.resetValues();
+            itemControllerSingle.resetValues();
           },
         ),
         body: SingleChildScrollView(
@@ -77,6 +81,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
               _groupSelectWithItems,
+              _groupSelectSingleWithItems,
             ],
           ),
         ),
@@ -119,6 +124,21 @@ class _HomePageState extends State<HomePage> {
       activeColor: Colors.red,
       title: 'With items',
       controller: itemController,
+      items: [
+        Item(title: 'Item 1', value: 1),
+        Item(title: 'Item 2', value: 2),
+        Item(title: 'Item 3', value: 3),
+        Item(title: 'Item 4', value: 4),
+        Item(title: 'Item 5', value: 5),
+      ],
+    );
+  }
+
+  get _groupSelectSingleWithItems {
+    return GroupSelect<int>(
+      activeColor: Colors.red,
+      title: 'Single With items',
+      controller: itemControllerSingle,
       items: [
         Item(title: 'Item 1', value: 1),
         Item(title: 'Item 2', value: 2),
