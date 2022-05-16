@@ -5,16 +5,20 @@ import 'package:group_select/controllers/group_select/group_select_controller.da
 
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter/material.dart';
-import 'package:group_select/utils/ci_colors.dart';
+import 'package:group_select/utils/colors_util.dart';
 
 export 'package:group_select/components/item_select.dart';
 export 'package:group_select/components/group_item.dart';
 
 typedef T = dynamic;
 
-enum Lang {
-  ptBR,
-  enUS,
+enum LangBadge {
+  ptBR('de'),
+  enUS('from');
+
+  final String translate;
+
+  const LangBadge(this.translate);
 }
 
 class GroupSelect<T> extends StatefulWidget {
@@ -24,7 +28,7 @@ class GroupSelect<T> extends StatefulWidget {
     required this.controller,
     this.groups,
     this.items,
-    this.activeColor = CIColors.blue,
+    this.activeColor = ColorsUtil.blue,
   })  : assert(groups != null || items != null),
         super(key: key);
 
@@ -84,11 +88,11 @@ class _GroupSelectState extends State<GroupSelect> {
                   turns: widget.controller.rotation,
                   child: const Icon(
                     Icons.expand_more,
-                    color: CIColors.grey500,
+                    color: ColorsUtil.grey500,
                   ),
                 ),
               ),
-              activeColor: widget.activeColor ?? CIColors.blue,
+              activeColor: widget.activeColor ?? ColorsUtil.blue,
               selectController: widget.controller,
               title: widget.title,
               isSub: false,
@@ -123,7 +127,7 @@ class GroupBadge extends StatelessWidget {
         text,
         style: TextStyle(
           fontSize: 14,
-          color: active ? CIColors.white : CIColors.grey600,
+          color: active ? ColorsUtil.white : ColorsUtil.grey600,
           fontWeight: FontWeight.bold,
         ),
       ),
@@ -131,7 +135,7 @@ class GroupBadge extends StatelessWidget {
         borderRadius: const BorderRadius.all(
           Radius.circular(20),
         ),
-        color: active ? activeColor : CIColors.grey200,
+        color: active ? activeColor : ColorsUtil.grey200,
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:group_select/group_select.dart';
+import 'package:group_select/utils/colors_util.dart';
 
 void main() {
   runApp(const MyApp());
@@ -41,88 +42,90 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final SelectController<int> controller = SelectController<int>();
-  final SelectController<String> controller2 = SelectController<String>();
+  final SelectController<int> itemController = SelectController<int>();
+  final SelectController<String> groupController = SelectController<String>();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: ElevatedButton(
-        child: const Padding(
-          padding: EdgeInsets.all(20.0),
-          child: Text('Reset'),
-        ),
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(Colors.blue),
-        ),
-        onPressed: () {
-          controller.resetValues();
-          controller2.resetValues();
-        },
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            GroupSelect<int>(
-              activeColor: Colors.red,
-              title: 'With items',
-              controller: controller,
-              items: [
-                Item(title: 'Item 1', value: 1),
-                Item(title: 'Item 2', value: 2),
-                Item(title: 'Item 3', value: 3),
-                Item(title: 'Item 4', value: 4),
-                Item(title: 'Item 5', value: 5),
-              ],
+    return SafeArea(
+      child: Scaffold(
+        bottomNavigationBar: ElevatedButton(
+          child: const Padding(
+            padding: EdgeInsets.all(10.0),
+            child: Text(
+              'Reset',
+              style: TextStyle(fontSize: 20),
             ),
-            GroupSelect<String>(
-              title: 'With groups items',
-              activeColor: Colors.green,
-              controller: controller2,
-              groups: [
-                Group(
-                  title: 'Grupo 1',
-                  id: '1',
-                  items: [
-                    Item(
-                      title: 'Item 1',
-                      value: '1',
-                      leading: const Icon(Icons.circle),
-                    ),
-                    Item(
-                      title: 'Item 2',
-                      value: '2',
-                      leading: const Icon(Icons.circle),
-                    ),
-                    Item(
-                      title: 'Item 3',
-                      value: '3',
-                      leading: const Icon(Icons.circle),
-                    ),
-                    Item(
-                      title: 'Item 4',
-                      value: '4',
-                      leading: const Icon(Icons.circle),
-                    ),
-                    Item(title: 'Item 5', value: '5'),
-                  ],
-                ),
-                Group(
-                  title: 'Grupo 2',
-                  id: '',
-                  items: [
-                    Item(title: 'Item 1', value: '6'),
-                    Item(title: 'Item 2', value: '7'),
-                    Item(title: 'Item 3', value: '8'),
-                    Item(title: 'Item 4', value: '9'),
-                    Item(title: 'Item 5', value: '10'),
-                  ],
-                ),
-              ],
-            )
-          ],
+          ),
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(Colors.blue),
+          ),
+          onPressed: () {
+            itemController.resetValues();
+            groupController.resetValues();
+          },
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              GroupSelect<String>(
+                title: 'With groups items',
+                activeColor: Colors.green,
+                controller: groupController,
+                groups: [
+                  _groupSelectWithGroup,
+                ],
+              ),
+              _groupSelectWithItems,
+            ],
+          ),
         ),
       ),
+    );
+  }
+
+  get _groupSelectWithGroup {
+    return Group(
+      title: 'Grupo 1',
+      id: '1',
+      items: [
+        Item(
+          title: 'Item 1',
+          value: '1',
+          leading: const Icon(Icons.circle),
+        ),
+        Item(
+          title: 'Item 2',
+          value: '2',
+          leading: const Icon(Icons.circle),
+        ),
+        Item(
+          title: 'Item 3',
+          value: '3',
+          leading: const Icon(Icons.circle),
+        ),
+        Item(
+          title: 'Item 4',
+          value: '4',
+          leading: const Icon(Icons.circle),
+        ),
+        Item(title: 'Item 5', value: '5'),
+      ],
+    );
+  }
+
+  get _groupSelectWithItems {
+    return GroupSelect<int>(
+      activeColor: Colors.red,
+      title: 'With items',
+      controller: itemController,
+      items: [
+        Item(title: 'Item 1', value: 1),
+        Item(title: 'Item 2', value: 2),
+        Item(title: 'Item 3', value: 3),
+        Item(title: 'Item 4', value: 4),
+        Item(title: 'Item 5', value: 5),
+      ],
     );
   }
 }

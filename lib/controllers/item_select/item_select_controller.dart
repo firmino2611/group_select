@@ -8,6 +8,7 @@ abstract class _ItemSelectControllerStoreBase with Store {
   @observable
   bool isCheck = false;
 
+  /// Set value of checked item
   @action
   setChecked(bool val) {
     isCheck = val;

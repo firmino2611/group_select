@@ -16,9 +16,17 @@ mixin _$GroupSelectControllerStore on _GroupSelectControllerBaseStore, Store {
       (_$getValuesComputed ??= Computed<List<dynamic>>(() => super.getValues,
               name: '_GroupSelectControllerBaseStore.getValues'))
           .value;
+  Computed<dynamic>? _$getValueComputed;
 
-  final _$groupItemsSelectAtom =
-      Atom(name: '_GroupSelectControllerBaseStore.groupItemsSelect');
+  @override
+  dynamic get getValue =>
+      (_$getValueComputed ??= Computed<dynamic>(() => super.getValue,
+              name: '_GroupSelectControllerBaseStore.getValue'))
+          .value;
+
+  late final _$groupItemsSelectAtom = Atom(
+      name: '_GroupSelectControllerBaseStore.groupItemsSelect',
+      context: context);
 
   @override
   ObservableList<GroupItem>? get groupItemsSelect {
@@ -33,8 +41,8 @@ mixin _$GroupSelectControllerStore on _GroupSelectControllerBaseStore, Store {
     });
   }
 
-  final _$hasGroupsAtom =
-      Atom(name: '_GroupSelectControllerBaseStore.hasGroups');
+  late final _$hasGroupsAtom =
+      Atom(name: '_GroupSelectControllerBaseStore.hasGroups', context: context);
 
   @override
   bool get hasGroups {
@@ -49,8 +57,8 @@ mixin _$GroupSelectControllerStore on _GroupSelectControllerBaseStore, Store {
     });
   }
 
-  final _$itemsSelectAtom =
-      Atom(name: '_GroupSelectControllerBaseStore.itemsSelect');
+  late final _$itemsSelectAtom = Atom(
+      name: '_GroupSelectControllerBaseStore.itemsSelect', context: context);
 
   @override
   ObservableList<ItemSelect>? get itemsSelect {
@@ -65,7 +73,8 @@ mixin _$GroupSelectControllerStore on _GroupSelectControllerBaseStore, Store {
     });
   }
 
-  final _$rotationAtom = Atom(name: '_GroupSelectControllerBaseStore.rotation');
+  late final _$rotationAtom =
+      Atom(name: '_GroupSelectControllerBaseStore.rotation', context: context);
 
   @override
   double get rotation {
@@ -80,7 +89,8 @@ mixin _$GroupSelectControllerStore on _GroupSelectControllerBaseStore, Store {
     });
   }
 
-  final _$valuesAtom = Atom(name: '_GroupSelectControllerBaseStore.values');
+  late final _$valuesAtom =
+      Atom(name: '_GroupSelectControllerBaseStore.values', context: context);
 
   @override
   ObservableList<dynamic>? get values {
@@ -95,30 +105,9 @@ mixin _$GroupSelectControllerStore on _GroupSelectControllerBaseStore, Store {
     });
   }
 
-  final _$_GroupSelectControllerBaseStoreActionController =
-      ActionController(name: '_GroupSelectControllerBaseStore');
-
-  @override
-  dynamic setHasGroups(bool val) {
-    final _$actionInfo = _$_GroupSelectControllerBaseStoreActionController
-        .startAction(name: '_GroupSelectControllerBaseStore.setHasGroups');
-    try {
-      return super.setHasGroups(val);
-    } finally {
-      _$_GroupSelectControllerBaseStoreActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  dynamic setup(GroupSelect<dynamic> widget) {
-    final _$actionInfo = _$_GroupSelectControllerBaseStoreActionController
-        .startAction(name: '_GroupSelectControllerBaseStore.setup');
-    try {
-      return super.setup(widget);
-    } finally {
-      _$_GroupSelectControllerBaseStoreActionController.endAction(_$actionInfo);
-    }
-  }
+  late final _$_GroupSelectControllerBaseStoreActionController =
+      ActionController(
+          name: '_GroupSelectControllerBaseStore', context: context);
 
   @override
   dynamic addValue(dynamic val) {
@@ -143,6 +132,39 @@ mixin _$GroupSelectControllerStore on _GroupSelectControllerBaseStore, Store {
   }
 
   @override
+  dynamic resetValues() {
+    final _$actionInfo = _$_GroupSelectControllerBaseStoreActionController
+        .startAction(name: '_GroupSelectControllerBaseStore.resetValues');
+    try {
+      return super.resetValues();
+    } finally {
+      _$_GroupSelectControllerBaseStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setHasGroups(bool val) {
+    final _$actionInfo = _$_GroupSelectControllerBaseStoreActionController
+        .startAction(name: '_GroupSelectControllerBaseStore.setHasGroups');
+    try {
+      return super.setHasGroups(val);
+    } finally {
+      _$_GroupSelectControllerBaseStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setup(GroupSelect<dynamic> widget) {
+    final _$actionInfo = _$_GroupSelectControllerBaseStoreActionController
+        .startAction(name: '_GroupSelectControllerBaseStore.setup');
+    try {
+      return super.setup(widget);
+    } finally {
+      _$_GroupSelectControllerBaseStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic toggle() {
     final _$actionInfo = _$_GroupSelectControllerBaseStoreActionController
         .startAction(name: '_GroupSelectControllerBaseStore.toggle');
@@ -161,7 +183,8 @@ hasGroups: ${hasGroups},
 itemsSelect: ${itemsSelect},
 rotation: ${rotation},
 values: ${values},
-getValues: ${getValues}
+getValues: ${getValues},
+getValue: ${getValue}
     ''';
   }
 }

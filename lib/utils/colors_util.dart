@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 /// Colors based on the Design Dystem of ConstructIN
-class CIColors {
+class ColorsUtil {
   static const black = Color(0xff18181a);
   static const white = Color(0xffffffff);
 
   static const indigo = Color(0xff3C5AC5);
 
-  static const light = CIColors.grey100;
+  static const light = ColorsUtil.grey100;
 
   // blue scale
   static const lightBlue = Color(0xff66B6FF);

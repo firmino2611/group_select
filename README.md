@@ -1,5 +1,4 @@
 Multiple selection component with groupings
-
 ## Getting started
 
 Import package
@@ -13,9 +12,11 @@ import 'package:group_select/group_select.dart';
 To use the component it is necessary to create a controller, and you can also specify a custom type for the controller and for the component.
 
 ```dart
-final SelectController<int> controller = SelectController<int>();
+final SelectController<int> controller = SelectController<int>(
+    lang:
+);
 
-final SelectController<String> controller2 = SelectController<String>();
+final SelectController<String> groupController = SelectController<String>();
 ```
 
 The initalization component need to receive a controller:
@@ -47,7 +48,7 @@ The groups need of an unique id.
 GroupSelect<String>(
     title: 'With groups items',
     activeColor: Colors.green,
-    controller: controller2,
+    controller: groupController,
     groups: [
         Group(
             title: 'Grupo 1',
@@ -118,7 +119,13 @@ GroupSelect<String>(
 To recover values selected use property **values** of controller:
 
 ```dart
-List<T> get getValues(){}
+List<T> get getValues
+```
+
+To recovery single value, when multiple options is false
+
+```dart
+List<T> get getValue
 ```
 
 To clear a values use:

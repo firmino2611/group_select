@@ -3,7 +3,7 @@ import 'package:group_select/controllers/group_header/group_header_controller.da
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:group_select/controllers/group_select/group_select_controller.dart';
-import 'package:group_select/utils/ci_colors.dart';
+import 'package:group_select/utils/colors_util.dart';
 
 class GroupHeader extends StatefulWidget {
   const GroupHeader({
@@ -47,10 +47,10 @@ class _GroupHeaderState extends State<GroupHeader> {
     return Container(
       height: 55,
       decoration: BoxDecoration(
-        color: widget.isSub ? CIColors.grey100 : CIColors.white,
+        color: widget.isSub ? ColorsUtil.grey100 : ColorsUtil.white,
         border: const Border(
           bottom: BorderSide(
-            color: CIColors.grey200,
+            color: ColorsUtil.grey200,
           ),
         ),
       ),
@@ -69,7 +69,7 @@ class _GroupHeaderState extends State<GroupHeader> {
                       widget.title,
                       style: const TextStyle(
                         fontSize: 17,
-                        color: CIColors.grey700,
+                        color: ColorsUtil.grey700,
                         overflow: TextOverflow.ellipsis,
                       ),
                       maxLines: 1,
@@ -86,22 +86,24 @@ class _GroupHeaderState extends State<GroupHeader> {
             ),
           ),
           Visibility(
-            visible: widget.isSub && widget.controller != null,
+            visible: widget.isSub &&
+                widget.controller != null &&
+                (widget.selectController?.multiple ?? false),
             child: Observer(
               builder: (_) {
                 return Padding(
                   padding: const EdgeInsets.only(right: 20.0),
                   child: Checkbox(
-                    onChanged: widget.controller?.onClickChackAll,
+                    onChanged: widget.controller?.onClickCheckAll,
                     value: widget.controller?.checkAll ?? false,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(6),
                     ),
                     fillColor: MaterialStateProperty.resolveWith((states) {
                       if (states.contains(MaterialState.selected)) {
-                        return widget.activeColor ?? CIColors.blue;
+                        return widget.activeColor ?? ColorsUtil.blue;
                       }
-                      return CIColors.grey600;
+                      return ColorsUtil.grey600;
                     }),
                   ),
                 );
@@ -113,6 +115,7 @@ class _GroupHeaderState extends State<GroupHeader> {
     );
   }
 
-  String get _getText =>
-      "${widget.itemCountSelected.toString()} ${widget.selectController?.translateBadge()} ${widget.itemCount.toString()}";
+  String get _getText => "${widget.itemCountSelected.toString()} "
+      "${widget.selectController?.lang.translate} "
+      "${widget.itemCount.toString()}";
 }

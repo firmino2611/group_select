@@ -1,3 +1,5 @@
+// ignore_for_file: unused_element
+
 import 'dart:async';
 import 'dart:developer';
 
@@ -15,20 +17,12 @@ class GroupSelectControllerStore<T> = _GroupSelectControllerBaseStore
     with _$GroupSelectControllerStore;
 
 abstract class _GroupSelectControllerBaseStore with Store {
-  int totalItems = 0;
-
-  bool _hasInitialized = false;
-
-  final _whenValuesClearedStream = StreamController<bool>.broadcast();
-  late Stream<bool> whenValuesCleared;
-
   _GroupSelectControllerBaseStore({
-    this.lang = Lang.enUS,
+    this.lang = LangBadge.enUS,
+    this.multiple = true,
   }) {
     whenValuesCleared = _whenValuesClearedStream.stream;
   }
-
-  final Lang lang;
 
   @observable
   ObservableList<GroupItem>? groupItemsSelect;
@@ -39,14 +33,73 @@ abstract class _GroupSelectControllerBaseStore with Store {
   @observable
   ObservableList<ItemSelect>? itemsSelect;
 
+  final LangBadge lang;
+  final bool multiple;
+  final _whenValuesClearedStream = StreamController<bool>.broadcast();
+
+  late Stream<bool> whenValuesCleared;
+
+  int totalItems = 0;
+  bool _hasInitialized = false;
+
   @observable
   double rotation = 0;
 
   @observable
   ObservableList<T>? values = ObservableList<T>();
 
+  /// Add new values in controller
+  /// [val] dynamic or T
+  @action
+  addValue(val) {
+    bool exists = values?.contains(val) ?? false;
+    if (!exists) {
+      values?.add(val);
+    }
+    log('values: ' + values.toString());
+  }
+
+  /// Closed controller stream
+  dispose() {
+    _whenValuesClearedStream.close();
+  }
+
+  /// Recovery list of selected values
   @computed
   List<T> get getValues => values?.map((val) => val).toList() ?? [];
+
+  /// Can be used when the  multiple option id true
+  @computed
+  T get getValue => values?.map((val) => val).first;
+
+  /// Verify if has any group with id repeat
+  /// [groups] list of groups
+  hasGroupIdsRepeated(List<Group>? groups) {
+    if (groups != null) {
+      for (Group group in groups) {
+        final size = groups.where(
+          (g) => g.id == group.id,
+        );
+
+        if (size.length > 1) return true;
+      }
+    }
+    return false;
+  }
+
+  /// Remove value of list
+  /// [val] values to be removed of list
+  @action
+  removeValue(val) {
+    values?.removeWhere((value) => value == val);
+  }
+
+  /// Reset all selected values
+  @action
+  resetValues() {
+    values?.clear();
+    _whenValuesClearedStream.sink.add(true);
+  }
 
   /// Setup control verify has group
   /// [val] if 'true' has groups
@@ -107,64 +160,9 @@ abstract class _GroupSelectControllerBaseStore with Store {
     }
   }
 
-  /// Add new values in controller
-  /// [val] dynamic or T
-  @action
-  addValue(val) {
-    bool exists = values?.contains(val) ?? false;
-    if (!exists) {
-      values?.add(val);
-    }
-    log('values: ' + values.toString());
-  }
-
-  /// Remove value of list
-  /// [val] values to be removed of list
-  @action
-  removeValue(val) {
-    values?.removeWhere((value) => value == val);
-  }
-
   /// Control display of items/groups
   @action
   toggle() {
     rotation = rotation == 0 ? .5 : 0;
-  }
-
-  /// Reset all selected values
-  @action
-  resetValues() {
-    values?.clear();
-    _whenValuesClearedStream.sink.add(true);
-  }
-
-  /// Closed controller stream
-  dispose() {
-    _whenValuesClearedStream.close();
-  }
-
-  /// Verify if has any group with id repeat
-  /// [groups] list of groups
-  hasGroupIdsRepeated(List<Group>? groups) {
-    if (groups != null) {
-      for (Group group in groups) {
-        final size = groups.where(
-          (g) => g.id == group.id,
-        );
-
-        if (size.length > 1) return true;
-      }
-    }
-    return false;
-  }
-
-  /// Translate text of badge item
-  translateBadge() {
-    switch (lang) {
-      case Lang.ptBR:
-        return 'de';
-      case Lang.enUS:
-        return 'from';
-    }
   }
 }

@@ -3,7 +3,7 @@ import 'package:group_select/controllers/item_select/item_select_controller.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-import 'package:group_select/utils/ci_colors.dart';
+import 'package:group_select/utils/colors_util.dart';
 
 class ItemSelect extends StatefulWidget {
   const ItemSelect({
@@ -30,11 +30,17 @@ class _ItemSelectState extends State<ItemSelect> {
     super.initState();
 
     widget.selectController?.whenValuesCleared.listen((event) {
-      widget.controller?.setChecked(false);
+      if (widget.selectController!.multiple) {
+        widget.controller?.setChecked(false);
+      } else {
+        widget.controller?.setChecked(
+          widget.selectController!.getValues.contains(widget.item.value),
+        );
+      }
     });
   }
 
-  void _check() {
+  void _checkMultiple() {
     widget.controller?.setChecked(!(widget.controller?.isCheck ?? false));
 
     if (widget.controller?.isCheck ?? false) {
@@ -42,6 +48,13 @@ class _ItemSelectState extends State<ItemSelect> {
     } else {
       widget.selectController?.removeValue(widget.item.value);
     }
+  }
+
+  void _checkSingle() {
+    widget.selectController?.resetValues();
+    widget.controller?.setChecked(true);
+
+    widget.selectController?.addValue(widget.item.value);
   }
 
   @override
@@ -52,7 +65,7 @@ class _ItemSelectState extends State<ItemSelect> {
           border: Border(
             bottom: BorderSide(
               width: .5,
-              color: CIColors.grey300,
+              color: ColorsUtil.grey300,
             ),
           ),
         ),
@@ -62,15 +75,16 @@ class _ItemSelectState extends State<ItemSelect> {
               widget.item.title,
               style: const TextStyle(
                 fontSize: 17,
-                color: CIColors.grey700,
+                color: ColorsUtil.grey700,
                 overflow: TextOverflow.fade,
               ),
               maxLines: 1,
               overflow: TextOverflow.fade,
             ),
           ),
-          tileColor: CIColors.grey100,
-          onTap: _check,
+          tileColor: ColorsUtil.grey100,
+          onTap:
+              widget.selectController!.multiple ? _checkMultiple : _checkSingle,
           leading: widget.item.leading,
           minLeadingWidth: 5,
           contentPadding: EdgeInsets.only(
@@ -79,7 +93,9 @@ class _ItemSelectState extends State<ItemSelect> {
           ),
           trailing: Checkbox(
             onChanged: (bool? value) {
-              _check();
+              widget.selectController!.multiple
+                  ? _checkMultiple()
+                  : _checkSingle();
             },
             value: (widget.controller?.isCheck ?? false) &&
                 widget.selectController!.getValues.isNotEmpty,
@@ -88,9 +104,9 @@ class _ItemSelectState extends State<ItemSelect> {
             ),
             fillColor: MaterialStateProperty.resolveWith((states) {
               if (states.contains(MaterialState.selected)) {
-                return widget.activeColor ?? CIColors.blue;
+                return widget.activeColor ?? ColorsUtil.blue;
               }
-              return CIColors.grey600;
+              return ColorsUtil.grey600;
             }),
           ),
         ),

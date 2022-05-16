@@ -9,7 +9,8 @@ part of 'item_select_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$ItemSelectController on _ItemSelectControllerStoreBase, Store {
-  final _$isCheckAtom = Atom(name: '_ItemSelectControllerStoreBase.isCheck');
+  late final _$isCheckAtom =
+      Atom(name: '_ItemSelectControllerStoreBase.isCheck', context: context);
 
   @override
   bool get isCheck {
@@ -24,8 +25,9 @@ mixin _$ItemSelectController on _ItemSelectControllerStoreBase, Store {
     });
   }
 
-  final _$_ItemSelectControllerStoreBaseActionController =
-      ActionController(name: '_ItemSelectControllerStoreBase');
+  late final _$_ItemSelectControllerStoreBaseActionController =
+      ActionController(
+          name: '_ItemSelectControllerStoreBase', context: context);
 
   @override
   dynamic setChecked(bool val) {

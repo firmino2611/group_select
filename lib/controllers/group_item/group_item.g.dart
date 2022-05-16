@@ -9,7 +9,8 @@ part of 'group_item.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$GroupItemController on _GroupItemControllerStoreBase, Store {
-  final _$rotationAtom = Atom(name: '_GroupItemControllerStoreBase.rotation');
+  late final _$rotationAtom =
+      Atom(name: '_GroupItemControllerStoreBase.rotation', context: context);
 
   @override
   double get rotation {
@@ -24,8 +25,8 @@ mixin _$GroupItemController on _GroupItemControllerStoreBase, Store {
     });
   }
 
-  final _$groupValuesAtom =
-      Atom(name: '_GroupItemControllerStoreBase.groupValues');
+  late final _$groupValuesAtom =
+      Atom(name: '_GroupItemControllerStoreBase.groupValues', context: context);
 
   @override
   ObservableList<dynamic>? get groupValues {
@@ -40,8 +41,8 @@ mixin _$GroupItemController on _GroupItemControllerStoreBase, Store {
     });
   }
 
-  final _$_GroupItemControllerStoreBaseActionController =
-      ActionController(name: '_GroupItemControllerStoreBase');
+  late final _$_GroupItemControllerStoreBaseActionController =
+      ActionController(name: '_GroupItemControllerStoreBase', context: context);
 
   @override
   dynamic toggle() {

@@ -1,3 +1,12 @@
+## 1.3.0
+- Added new option of initialized controller, (**multiple**) define the type of selection.
+- Update enum to super enum, of new API Dart.
+- Update dart sdk version 2.17
+- Update Flutter sdk 3.0.0
+- Update README.md
+
+- Removed method internal (**translateBadge**)
+
 ## 1.2.0
 
 - Added new action to clear a values (**resetValues**)

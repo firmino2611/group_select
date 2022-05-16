@@ -12,7 +12,7 @@ abstract class _GroupHeaderControllerStoreBase with Store {
 
   /// Detect click on chackbox in header
   @action
-  onClickChackAll(bool? value, [bool? onlyVisual]) {
+  onClickCheckAll(bool? value, [bool? onlyVisual]) {
     checkAll = value;
 
     changeOnlyVIsual = onlyVisual ?? false;

@@ -21,6 +21,7 @@ abstract class _GroupItemControllerStoreBase with Store {
   }
 
   /// Count number of items selected
+  /// [GroupItem] group item
   countItemsSelected(GroupItem widget) {
     int count = 0;
     for (ItemSelect item in widget.items!) {

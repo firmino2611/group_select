@@ -2,7 +2,7 @@ import 'package:group_select/components/group_header.dart';
 import 'package:group_select/controllers/group_header/group_header_controller.dart';
 import 'package:group_select/controllers/group_item/group_item.dart';
 import 'package:group_select/controllers/group_select/group_select_controller.dart';
-import 'package:group_select/utils/ci_colors.dart';
+import 'package:group_select/utils/colors_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
@@ -38,6 +38,8 @@ class _GroupItemState extends State<GroupItem> {
   void initState() {
     super.initState();
 
+    /// React when the select all on header is clicked and
+    /// change all items to false
     reaction((fn) => groupHeaderController.checkAll, (bool? value) {
       if (!groupHeaderController.changeOnlyVIsual) {
         widget.items?.forEach((item) {
@@ -54,7 +56,7 @@ class _GroupItemState extends State<GroupItem> {
       bool allItemSelected =
           widget.items?.length == widget.controller!.countItemsSelected(widget);
 
-      groupHeaderController.onClickChackAll(allItemSelected, true);
+      groupHeaderController.onClickCheckAll(allItemSelected, true);
     });
   }
 
@@ -76,7 +78,7 @@ class _GroupItemState extends State<GroupItem> {
                     turns: widget.controller?.rotation ?? 0,
                     child: const Icon(
                       Icons.expand_more,
-                      color: CIColors.grey500,
+                      color: ColorsUtil.grey500,
                     ),
                   ),
                 ),
