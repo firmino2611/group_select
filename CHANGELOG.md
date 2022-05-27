@@ -1,4 +1,11 @@
+## 1.4.0
+- Added new controller, to facilitate the use of available resources
+- Added new propertie. (**onChange**) function to listen for changes in selected values
+- Update README.md
+- Update min version Flutter SDK to >=2.2.0
+
 ## 1.3.1
+
 - Update README.md
 - Removed badge in single option
 

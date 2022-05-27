@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:group_select/controllers/group_select/group_select_controller.dart';
 import 'package:group_select/group_select.dart';
-import 'package:group_select/utils/colors_util.dart';
 
 void main() {
   runApp(const MyApp());
@@ -42,11 +42,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final SelectController<int> itemController = SelectController<int>();
-  final SelectController<String> groupController = SelectController<String>();
-  final SelectController<int> itemControllerSingle = SelectController<int>(
-    multiple: false,
-  );
+  final itemController = SelectGroupController<int>();
+  final groupController = SelectGroupController<String>();
+  final itemControllerSingle = SelectGroupController<int>(multiple: false);
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,6 +79,9 @@ class _HomePageState extends State<HomePage> {
                 title: 'With groups items',
                 activeColor: Colors.green,
                 controller: groupController,
+                onChange: (values) {
+                  print(values);
+                },
                 groups: [
                   _groupSelectWithGroup,
                 ],

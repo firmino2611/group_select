@@ -15,6 +15,7 @@ abstract class _GroupItemControllerStoreBase with Store {
   @observable
   ObservableList? groupValues = ObservableList();
 
+  /// Change rotation icon arrow
   @action
   toggle() {
     rotation = rotation == 0 ? .5 : 0;

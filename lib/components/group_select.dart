@@ -5,7 +5,9 @@ import 'package:group_select/controllers/group_select/group_select_controller.da
 
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter/material.dart';
+import 'package:group_select/controllers/select_group_controller.dart';
 import 'package:group_select/utils/colors_util.dart';
+import 'package:mobx/mobx.dart';
 
 export 'package:group_select/components/item_select.dart';
 export 'package:group_select/components/group_item.dart';
@@ -29,17 +31,26 @@ class GroupSelect<T> extends StatefulWidget {
     this.groups,
     this.items,
     this.activeColor = ColorsUtil.blue,
+    this.onChange,
   })  : assert(groups != null || items != null),
         super(key: key);
 
-  final GroupSelectControllerStore<T> controller;
+  /// Controller component
+  final SelectGroupController<T> controller;
 
   final List<Group<T>>? groups;
   final List<Item<T>>? items;
 
+  /// Title header top
   final String title;
 
+  /// Color active items
   final Color? activeColor;
+
+  /// Called whenever selected values change, returns values
+  ///  in case of multiple selection or a single value in
+  ///  case of single selection.
+  final void Function(dynamic)? onChange;
 
   @override
   _GroupSelectState createState() => _GroupSelectState();
@@ -51,21 +62,22 @@ class _GroupSelectState extends State<GroupSelect> {
     super.initState();
 
     assert(
-      !widget.controller.hasGroupIdsRepeated(widget.groups),
+      !widget.controller.selectCtrl.hasGroupIdsRepeated(widget.groups),
       'contains repeated group id',
     );
 
-    widget.controller.setup(widget);
-    widget.controller.setHasGroups(widget.groups != null);
+    widget.controller.selectCtrl.setup(widget);
+    widget.controller.selectCtrl.setHasGroups(widget.groups != null);
   }
 
+  /// Validate content show
   _validateContent() {
-    if (widget.controller.rotation != 0) {
+    if (widget.controller.selectCtrl.rotation != 0) {
       if (widget.groups != null) {
-        return widget.controller.groupItemsSelect;
+        return widget.controller.selectCtrl.groupItemsSelect;
       }
       if (widget.items != null) {
-        return widget.controller.itemsSelect;
+        return widget.controller.selectCtrl.itemsSelect;
       }
     }
     return [];
@@ -78,14 +90,14 @@ class _GroupSelectState extends State<GroupSelect> {
         children: [
           InkWell(
             onTap: () {
-              widget.controller.toggle();
+              widget.controller.selectCtrl.toggle();
             },
             child: GroupHeader(
               icon: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: AnimatedRotation(
                   duration: const Duration(milliseconds: 200),
-                  turns: widget.controller.rotation,
+                  turns: widget.controller.selectCtrl.rotation,
                   child: const Icon(
                     Icons.expand_more,
                     color: ColorsUtil.grey500,
@@ -93,11 +105,13 @@ class _GroupSelectState extends State<GroupSelect> {
                 ),
               ),
               activeColor: widget.activeColor ?? ColorsUtil.blue,
-              selectController: widget.controller,
+              selectController: widget.controller.selectCtrl,
               title: widget.title,
               isSub: false,
-              itemCount: widget.items?.length ?? widget.controller.totalItems,
-              itemCountSelected: widget.controller.values?.length ?? 0,
+              itemCount: widget.items?.length ??
+                  widget.controller.selectCtrl.totalItems,
+              itemCountSelected:
+                  widget.controller.selectCtrl.values?.length ?? 0,
             ),
           ),
           ..._validateContent(),

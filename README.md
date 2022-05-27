@@ -9,17 +9,19 @@ Import package
 import 'package:group_select/group_select.dart';
 ```
 
+## OBS: The controller was changed from SelectController to SelectGroupController. The previous code will still work but it is recommended to change to the new controller
+
 ## Usage
 
 To use the component it is necessary to create a controller, and you can also specify a custom type for the controller and for the component.
 
 ```dart
-final SelectController<int> controller = SelectController<int>(
+final  controller = SelectGroupController<int>(
     lang: LangBadge.enUS,
     multiple: false,
 );
 
-final SelectController<String> groupController = SelectController<String>();
+final  groupController = SelectGroupController<String>();
 ```
 
 The initalization component need to receive a controller:
@@ -48,6 +50,9 @@ GroupSelect<String>(
     title: 'With groups items',
     activeColor: Colors.green,
     controller: groupController,
+     onChange: (values) {
+        print(values);
+    }
     groups: [
         Group(
             title: 'Grupo 1',
@@ -77,6 +82,27 @@ GroupSelect<String>(
 
 ## Properties
 
+### Groups
+
+Groups receive items, and must have a unique id.
+
+```dart
+Group(
+    title: 'Grupo 2',
+    id: '2',
+
+    items: [
+        Item(title: 'Item 1', value: '6'),
+        Item(title: 'Item 2', value: '7'),
+        Item(title: 'Item 3', value: '8'),
+        Item(title: 'Item 4', value: '9'),
+        Item(title: 'Item 5', value: '10'),
+    ],
+),
+```
+
+### Items
+
 Items can have a **leading**, that can be any widget:
 
 ```dart
@@ -92,7 +118,25 @@ Item(
 ),
 ```
 
-It's possible change color active (**activeColor**) in badge and checkbox:
+### onChange
+
+It is always called when there is a change in the selected items:
+
+```dart
+GroupSelect<T>(
+    title: 'With groups items',
+    activeColor: Colors.green,
+    controller: groupController,
+     onChange: (dynamic values) {
+        print(values);
+    }
+    // ... code ommitted
+)
+```
+
+### activeColor
+
+It's possible change color active in badge and checkbox:
 
 ```dart
 GroupSelect<String>(
@@ -103,22 +147,16 @@ GroupSelect<String>(
 
 ## Controller
 
-To recover values selected use property **values** of controller:
+Recover value selected. If multiple enable the value is a [List<T>], else return a single value [T]:
 
 ```dart
-List<T> get getValues
-```
-
-To recovery single value, when multiple options is false
-
-```dart
-List<T> get getValue
+dynamic get value
 ```
 
 To clear a values use:
 
 ```dart
-List<T> get resetValues(){}
+void resetValues()
 ```
 
 ## Additional information

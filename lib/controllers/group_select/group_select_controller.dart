@@ -6,11 +6,13 @@ import 'dart:developer';
 import 'package:group_select/components/group_select.dart';
 import 'package:group_select/controllers/group_item/group_item.dart';
 import 'package:group_select/controllers/item_select/item_select_controller.dart';
+import 'package:group_select/controllers/select_group_controller.dart';
 
 import 'package:mobx/mobx.dart';
 part 'group_select_controller.g.dart';
 
 typedef SelectController<T> = GroupSelectControllerStore<T>;
+typedef OnChange = Function(dynamic);
 
 /// Class to controller Widget
 class GroupSelectControllerStore<T> = _GroupSelectControllerBaseStore
@@ -42,9 +44,11 @@ abstract class _GroupSelectControllerBaseStore with Store {
   int totalItems = 0;
   bool _hasInitialized = false;
 
+  /// Degree rotation of icon arrow
   @observable
   double rotation = 0;
 
+  /// Values selected
   @observable
   ObservableList<T>? values = ObservableList<T>();
 
@@ -56,7 +60,6 @@ abstract class _GroupSelectControllerBaseStore with Store {
     if (!exists) {
       values?.add(val);
     }
-    log('values: ' + values.toString());
   }
 
   /// Closed controller stream
@@ -122,7 +125,8 @@ abstract class _GroupSelectControllerBaseStore with Store {
             item: e,
             activeColor: widget.activeColor,
             controller: ItemSelectController(),
-            selectController: widget.controller,
+            selectController: widget.controller.selectCtrl,
+            onChnage: widget.onChange,
           );
         },
       ).toList();
@@ -146,11 +150,12 @@ abstract class _GroupSelectControllerBaseStore with Store {
                 item: i,
                 activeColor: widget.activeColor,
                 controller: ItemSelectController(),
-                selectController: widget.controller,
+                selectController: widget.controller.selectCtrl,
+                onChnage: widget.onChange,
               );
             }).toList(),
             controller: GroupItemController(),
-            selectController: widget.controller,
+            selectController: widget.controller.selectCtrl,
           );
         },
       ).toList();

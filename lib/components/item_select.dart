@@ -12,6 +12,7 @@ class ItemSelect extends StatefulWidget {
     this.controller,
     this.selectController,
     this.activeColor,
+    this.onChnage,
   }) : super(key: key);
 
   final ItemSelectController? controller;
@@ -19,6 +20,7 @@ class ItemSelect extends StatefulWidget {
   final GroupSelectControllerStore? selectController;
 
   final Color? activeColor;
+  final Function(dynamic)? onChnage;
 
   @override
   _ItemSelectState createState() => _ItemSelectState();
@@ -48,6 +50,12 @@ class _ItemSelectState extends State<ItemSelect> {
     } else {
       widget.selectController?.removeValue(widget.item.value);
     }
+
+    if (widget.onChnage != null) {
+      widget.onChnage!(
+        widget.selectController?.getValues ?? [],
+      );
+    }
   }
 
   void _checkSingle() {
@@ -55,6 +63,12 @@ class _ItemSelectState extends State<ItemSelect> {
     widget.controller?.setChecked(true);
 
     widget.selectController?.addValue(widget.item.value);
+
+    if (widget.onChnage != null) {
+      widget.onChnage!(
+        widget.selectController?.getValue,
+      );
+    }
   }
 
   @override
