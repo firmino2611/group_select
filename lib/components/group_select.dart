@@ -1,13 +1,11 @@
 import 'package:group_select/components/group_header.dart';
 import 'package:group_select/components/group_item.dart';
 import 'package:group_select/components/item_select.dart';
-import 'package:group_select/controllers/group_select/group_select_controller.dart';
 
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter/material.dart';
 import 'package:group_select/controllers/select_group_controller.dart';
 import 'package:group_select/utils/colors_util.dart';
-import 'package:mobx/mobx.dart';
 
 export 'package:group_select/components/item_select.dart';
 export 'package:group_select/components/group_item.dart';
@@ -53,7 +51,7 @@ class GroupSelect<T> extends StatefulWidget {
   final void Function(dynamic)? onChange;
 
   @override
-  _GroupSelectState createState() => _GroupSelectState();
+  State<GroupSelect> createState() => _GroupSelectState();
 }
 
 class _GroupSelectState extends State<GroupSelect> {
@@ -137,6 +135,12 @@ class GroupBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(
+          Radius.circular(20),
+        ),
+        color: active ? activeColor : ColorsUtil.grey200,
+      ),
       child: Text(
         text,
         style: TextStyle(
@@ -144,12 +148,6 @@ class GroupBadge extends StatelessWidget {
           color: active ? ColorsUtil.white : ColorsUtil.grey600,
           fontWeight: FontWeight.bold,
         ),
-      ),
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.all(
-          Radius.circular(20),
-        ),
-        color: active ? activeColor : ColorsUtil.grey200,
       ),
     );
   }

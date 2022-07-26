@@ -28,7 +28,7 @@ class GroupItem extends StatefulWidget {
   final Color? activeColor;
 
   @override
-  _GroupItemState createState() => _GroupItemState();
+  State<GroupItem> createState() => _GroupItemState();
 }
 
 class _GroupItemState extends State<GroupItem> {
@@ -53,8 +53,10 @@ class _GroupItemState extends State<GroupItem> {
     });
 
     reaction((fn) => widget.controller?.countItemsSelected(widget), (values) {
-      bool allItemSelected =
-          widget.items?.length == widget.controller!.countItemsSelected(widget);
+      bool allItemSelected = widget.items?.length ==
+          widget.controller!.countItemsSelected(
+            widget,
+          );
 
       groupHeaderController.onClickCheckAll(allItemSelected, true);
     });

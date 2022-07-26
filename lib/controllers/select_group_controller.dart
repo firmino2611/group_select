@@ -7,12 +7,17 @@ class SelectGroupController<T> {
   SelectGroupController({
     this.lang = LangBadge.enUS,
     this.multiple = true,
+    this.dark = false,
   }) {
     _controller = SelectController<T>(
       lang: lang,
       multiple: multiple,
+      dark: dark,
     );
   }
+
+  /// Enable dark mode
+  final bool dark;
 
   /// Language badge of item
   final LangBadge lang;
@@ -24,7 +29,7 @@ class SelectGroupController<T> {
   late SelectController<T> _controller;
 
   /// Recover store controller of component
-  get selectCtrl => _controller;
+  SelectController get selectCtrl => _controller;
 
   /// Reset all values selected
   void resetValues() {

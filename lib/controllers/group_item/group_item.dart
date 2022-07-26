@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:group_select/components/group_item.dart';
 import 'package:group_select/components/item_select.dart';
 

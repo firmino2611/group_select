@@ -22,7 +22,7 @@ class ColorsUtil {
   static const grey400 = Color(0xffC7C7CC);
   static const grey500 = Color(0xffAEAEB2);
   static const grey600 = Color(0xff8E8E93);
-  static const grey700 = Color(0xff48484A);
+  static const grey700 = Color.fromARGB(255, 40, 40, 40);
 
   /// default colors
   static const green = Color(0xff3cc465);

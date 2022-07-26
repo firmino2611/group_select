@@ -23,7 +23,7 @@ class ItemSelect extends StatefulWidget {
   final Function(dynamic)? onChnage;
 
   @override
-  _ItemSelectState createState() => _ItemSelectState();
+  State<ItemSelect> createState() => _ItemSelectState();
 }
 
 class _ItemSelectState extends State<ItemSelect> {
@@ -73,59 +73,94 @@ class _ItemSelectState extends State<ItemSelect> {
 
   @override
   Widget build(BuildContext context) {
-    return Observer(builder: (_) {
-      return Container(
-        decoration: const BoxDecoration(
-          border: Border(
-            bottom: BorderSide(
-              width: .5,
-              color: ColorsUtil.grey300,
-            ),
-          ),
-        ),
-        child: ListTile(
-          title: Text(
-            widget.item.title,
-            style: const TextStyle(
-              fontSize: 17,
-              color: ColorsUtil.grey700,
+    return Observer(
+      builder: (_) {
+        return SizedBox(
+          child: ListTile(
+            title: Text(
+              widget.item.title,
+              style: TextStyle(
+                fontSize: 17,
+                color: widget.selectController!.dark
+                    ? ColorsUtil.white
+                    : ColorsUtil.grey700,
+                overflow: TextOverflow.fade,
+              ),
+              maxLines: 1,
               overflow: TextOverflow.fade,
             ),
-            maxLines: 1,
-            overflow: TextOverflow.fade,
+            tileColor: widget.selectController!.dark
+                ? ColorsUtil.grey700
+                : ColorsUtil.grey100,
+            onTap: widget.selectController!.multiple
+                ? _checkMultiple
+                : _checkSingle,
+            leading: widget.item.leading,
+            minLeadingWidth: 5,
+            contentPadding: EdgeInsets.only(
+              left: widget.selectController?.hasGroups ?? false ? 90 : 50,
+              right: 20,
+            ),
+            trailing: _CheckBox(
+              onChange: (bool? value) {
+                widget.selectController!.multiple
+                    ? _checkMultiple()
+                    : _checkSingle();
+              },
+              activeColor: widget.activeColor,
+              value: _checkValue,
+              shape: widget.selectController!.multiple
+                  ? RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(6),
+                    )
+                  : const CircleBorder(),
+            ),
           ),
-          tileColor: ColorsUtil.grey100,
-          onTap:
-              widget.selectController!.multiple ? _checkMultiple : _checkSingle,
-          leading: widget.item.leading,
-          minLeadingWidth: 5,
-          contentPadding: EdgeInsets.only(
-            left: widget.selectController?.hasGroups ?? false ? 90 : 50,
-            right: 20,
-          ),
-          trailing: Checkbox(
-            onChanged: (bool? value) {
-              widget.selectController!.multiple
-                  ? _checkMultiple()
-                  : _checkSingle();
-            },
-            value: (widget.controller?.isCheck ?? false) &&
-                widget.selectController!.getValues.isNotEmpty,
-            shape: widget.selectController!.multiple
-                ? RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(6),
-                  )
-                : const CircleBorder(),
-            fillColor: MaterialStateProperty.resolveWith((states) {
-              if (states.contains(MaterialState.selected)) {
-                return widget.activeColor ?? ColorsUtil.blue;
-              }
-              return ColorsUtil.grey600;
-            }),
-          ),
-        ),
-      );
-    });
+        );
+      },
+    );
+  }
+
+  /// Verify current value
+  bool get _checkValue {
+    return (widget.controller?.isCheck ?? false) &&
+        widget.selectController!.getValues.isNotEmpty;
+  }
+}
+
+/// Widget internal checkbox
+class _CheckBox extends StatefulWidget {
+  const _CheckBox({
+    Key? key,
+    required this.onChange,
+    this.value = false,
+    this.shape,
+    this.activeColor,
+  }) : super(key: key);
+
+  final Function(bool?) onChange;
+  final bool value;
+  final OutlinedBorder? shape;
+  final Color? activeColor;
+
+  @override
+  State<_CheckBox> createState() => __CheckBoxState();
+}
+
+class __CheckBoxState extends State<_CheckBox> {
+  @override
+  Widget build(BuildContext context) {
+    return Checkbox(
+      onChanged: widget.onChange,
+      value: widget.value,
+      shape: widget.shape,
+      fillColor: MaterialStateProperty.resolveWith((states) {
+        if (states.contains(MaterialState.selected)) {
+          return widget.activeColor ?? ColorsUtil.blue;
+        }
+        return ColorsUtil.grey600;
+      }),
+    );
   }
 }
 

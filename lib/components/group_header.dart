@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:group_select/controllers/group_select/group_select_controller.dart';
 import 'package:group_select/utils/colors_util.dart';
+import 'package:group_select/utils/style.dart';
 
 class GroupHeader extends StatefulWidget {
   const GroupHeader({
@@ -46,14 +47,9 @@ class _GroupHeaderState extends State<GroupHeader> {
   Widget build(BuildContext context) {
     return Container(
       height: 55,
-      decoration: BoxDecoration(
-        color: widget.isSub ? ColorsUtil.grey100 : ColorsUtil.white,
-        border: const Border(
-          bottom: BorderSide(
-            color: ColorsUtil.grey200,
-          ),
-        ),
-      ),
+      decoration: widget.selectController!.dark
+          ? Style.boxDecorationHeaderDark(widget.isSub)
+          : Style.boxDecorationHeaderLight(widget.isSub),
       padding: widget.isSub ? const EdgeInsets.only(left: 40) : null,
       child: Row(
         children: [
@@ -67,11 +63,9 @@ class _GroupHeaderState extends State<GroupHeader> {
                     padding: const EdgeInsets.only(right: 10),
                     child: Text(
                       widget.title,
-                      style: const TextStyle(
-                        fontSize: 17,
-                        color: ColorsUtil.grey700,
-                        overflow: TextOverflow.ellipsis,
-                      ),
+                      style: widget.selectController!.dark
+                          ? Style.textStyleHeaderDark()
+                          : Style.textStyleHeaderLight(),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),

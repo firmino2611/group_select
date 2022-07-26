@@ -1,6 +1,6 @@
 name: group_select
 description: 'Package FLutter: Multiple selection component with groupings'
-version: 1.4.0
+version: 1.5.0
 homepage: https://github.com/firmino2611/group_select
 
 environment:
@@ -11,15 +11,15 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_mobx: ^2.0.6+1
-  mobx: ^2.0.7+2
+  mobx: ^2.0.7+5
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^1.0.0
-  mobx_codegen: ^2.0.6+2
-  build_runner: ^2.1.7
+  flutter_lints: ^2.0.1
+  mobx_codegen: ^2.0.7
+  build_runner: ^2.2.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

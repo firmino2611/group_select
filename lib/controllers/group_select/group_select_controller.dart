@@ -1,12 +1,10 @@
-// ignore_for_file: unused_element
+// ignore_for_file: unused_element, library_private_types_in_public_api
 
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:group_select/components/group_select.dart';
 import 'package:group_select/controllers/group_item/group_item.dart';
 import 'package:group_select/controllers/item_select/item_select_controller.dart';
-import 'package:group_select/controllers/select_group_controller.dart';
 
 import 'package:mobx/mobx.dart';
 part 'group_select_controller.g.dart';
@@ -22,6 +20,7 @@ abstract class _GroupSelectControllerBaseStore with Store {
   _GroupSelectControllerBaseStore({
     this.lang = LangBadge.enUS,
     this.multiple = true,
+    this.dark = false,
   }) {
     whenValuesCleared = _whenValuesClearedStream.stream;
   }
@@ -37,6 +36,7 @@ abstract class _GroupSelectControllerBaseStore with Store {
 
   final LangBadge lang;
   final bool multiple;
+  final bool dark;
   final _whenValuesClearedStream = StreamController<bool>.broadcast();
 
   late Stream<bool> whenValuesCleared;
@@ -114,7 +114,7 @@ abstract class _GroupSelectControllerBaseStore with Store {
   /// Create widget items and groups
   /// [widget] GroupSelect
   @action
-  setup(GroupSelect widget) {
+  void setup(GroupSelect widget) {
     if (_hasInitialized) return;
 
     if (widget.items != null) {

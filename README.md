@@ -19,6 +19,7 @@ To use the component it is necessary to create a controller, and you can also sp
 final  controller = SelectGroupController<int>(
     lang: LangBadge.enUS,
     multiple: false,
+    dark: false,
 );
 
 final  groupController = SelectGroupController<String>();
@@ -144,6 +145,10 @@ GroupSelect<String>(
     activeColor: Colors.green,
 );
 ```
+
+### dark
+
+Enable mode dark to component. example in LINK DEMO.
 
 ## Controller
 

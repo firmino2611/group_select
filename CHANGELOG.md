@@ -1,8 +1,11 @@
+## 1.5.0
+- Add mode dark
+- Update dependences
 ## 1.4.0
 - Added new controller, to facilitate the use of available resources
 - Added new propertie. (**onChange**) function to listen for changes in selected values
 - Update README.md
-- Update min version Flutter SDK to >=2.2.0
+- Update min version Flutter SDK to >=3.0.0
 
 ## 1.3.1
 
