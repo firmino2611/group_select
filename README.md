@@ -1,5 +1,5 @@
 Multiple selection component with groupings
-##### DEMO http://group-select.appinventorbrasil.com.br/#/
+##### DEMO http://group-select.esquilodigital.com.br/#/
 
 ## Getting started
 
@@ -8,8 +8,6 @@ Import package
 ```dart
 import 'package:group_select/group_select.dart';
 ```
-
-## OBS: The controller was changed from SelectController to SelectGroupController. The previous code will still work but it is recommended to change to the new controller
 
 ## Usage
 

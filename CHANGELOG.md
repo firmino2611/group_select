@@ -1,40 +1,41 @@
+## 1.5.1
+- [update]: update version sdk to >=2.18.0 and Flutter version to >=3.3.0
 ## 1.5.0
-- Add mode dark
-- Update dependences
+- [add]: Add mode dark
+- [update]: Update dependences
 ## 1.4.0
-- Added new controller, to facilitate the use of available resources
-- Added new propertie. (**onChange**) function to listen for changes in selected values
-- Update README.md
-- Update min version Flutter SDK to >=3.0.0
+- [add]: Added new controller, to facilitate the use of available resources
+- [add]: Added new propertie. (**onChange**) function to listen for changes in selected values
+- [update]: Update README.md
+- [update]: Update min version Flutter SDK to >=3.0.0
 
 ## 1.3.1
 
-- Update README.md
-- Removed badge in single option
+- [update]: Update README.md
+- [remove]: Removed badge in single option
 
 ## 1.3.0
 
-- Added new option of initialized controller, (**multiple**) define the type of selection.
-- Update enum to super enum, of new API Dart.
-- Update dart sdk version 2.17
-- Update Flutter sdk 3.0.0
-- Update README.md
-
-- Removed method internal (**translateBadge**)
+- [add]: Added new option of initialized controller, (**multiple**) define the type of selection.
+- [update]: Update enum to super enum, of new API Dart.
+- [update]: Update dart sdk version 2.17
+- [update]: Update Flutter sdk 3.0.0
+- [update]: Update README.md
+- [remove]: Removed method internal (**translateBadge**)
 
 ## 1.2.0
 
-- Added new action to clear a values (**resetValues**)
-- Bug fixed: Layout header group
+- [add]: Added new action to clear a values (**resetValues**)
+- [fix]: fixed Layout header group
 
 ## 1.1.1
 
-- Bug fixed: Did not keep the values of select item after initialization
+- [fix]: Did not keep the values of select item after initialization
 
 ## 1.1.0
 
-- Added methods (**getValues**) to get values selected
-- Change name method in controller internal (does not affect use)
+- [add]: Added methods (**getValues**) to get values selected
+- [refact]: Change name method in controller internal (does not affect use)
 
 ### Comming soon:
 

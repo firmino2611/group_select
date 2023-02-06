@@ -42,7 +42,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final itemController = SelectGroupController<int>();
-  final groupController = SelectGroupController<String>(dark: true);
+  final groupController = SelectGroupController<String>(
+    dark: true,
+    lang: LangBadge.ptBR,
+  );
   final itemControllerSingle = SelectGroupController<int>(multiple: false);
 
   @override
